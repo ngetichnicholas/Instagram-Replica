@@ -25,6 +25,21 @@
     </div>
     <div class="col-md-2">
       <h2>People</h2>
+      {% for person in people %}
+      <div class="row">
+        <div class="col-md-3">
+          <img class="profile_photo" src="{{ person.profile_photo.url }}"
+          alt="{{ photos_item.profile.name }}">
+        </div>
+        <div class="col-md-9">
+          <p class="username" style="margin-top: 5px;">{{ person.username }}</p>
+        </div>
+      </div>
+      {% empty %}
+      <div class="row">
+        <h2 class="text-center">No people yet</h2>
+      </div>
+      {% endfor %}
     </div>
     <div class="col-md-2"></div>
   </div>
