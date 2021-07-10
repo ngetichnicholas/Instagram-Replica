@@ -9,7 +9,7 @@ from .models import Image
 def index(request):
   search_form = SearchForm()
   photos = Image.objects.all().order_by("-posted_at")
-  return render(request,'index.html',{'form':search_form})
+  return render(request,'index.html',{'photos':photos,'form':search_form})
 
 def search(request):
   return redirect('home')

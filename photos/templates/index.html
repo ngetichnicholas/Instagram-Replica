@@ -6,9 +6,19 @@
     <div class="col-md-1"></div>
     <div class="col-md-10">
       <h1>Welcome to instagram, just but a start</h1>
+      {% for photos_item in photos %}
+      <!--Display photos photo images  -->
+      <a href=""><img src="{{photos_item.image.url}}"
+          class="img-thumbnail" alt="Image"></a>
+
+      {% empty %}
+      <div class="row">
+        <h2 class="text-center">There is No photos Items</h2>
+      </div>
+      {% endfor %}
     </div>
     <div class="col-md-1"></div>
   </div>
-  
+
 </div>
 {% endblock %}
