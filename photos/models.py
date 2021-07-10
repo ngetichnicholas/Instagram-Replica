@@ -16,6 +16,7 @@ class Image(models.Model):
   profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
   likes = CharField(max_length=10)
   comments = TextField()
+  posted_at = models.DateTimeField(auto_now_add=True)
 
 
 
