@@ -5,10 +5,10 @@ from django.http import HttpResponse, Http404,HttpResponseRedirect
 
 # Create your views here.
 def index(request):
-  return render('index.html')
+  return render(request,'index.html')
 
 def search(request):
-  return render('home')
+  return redirect('home')
 
 def follow(request):
   return redirect('home')
