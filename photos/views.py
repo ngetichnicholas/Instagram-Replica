@@ -6,3 +6,18 @@ from django.http import HttpResponse, Http404,HttpResponseRedirect
 # Create your views here.
 def index(request):
   return render('index.html')
+
+def search(request):
+  return render('home')
+
+def follow(request):
+  return redirect('home')
+
+def unfollow(request):
+  return redirect('home')
+
+def subscribe(request):
+  return redirect('home')
+
+def profile(request):
+  return redirect('home')
