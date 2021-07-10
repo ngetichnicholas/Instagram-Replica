@@ -6,8 +6,8 @@ from django.http import HttpResponse, Http404,HttpResponseRedirect
 
 # Create your views here.
 def index(request):
-  form = SearchForm()
-  return render(request,'index.html',{'form':form})
+  search_form = SearchForm()
+  return render(request,'index.html',{'form':search_form})
 
 def search(request):
   return redirect('home')
