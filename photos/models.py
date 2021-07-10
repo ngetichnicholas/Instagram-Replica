@@ -7,7 +7,7 @@ from django.db.models.fields.related import ForeignKey
 # Create your models here.
 class Profile(models.Model):
   profile_photo = CloudinaryField('image')
-  name = CharField(max_length=30)
+  username = CharField(max_length=30)
   bio = TextField()
 
   def __str__(self):
