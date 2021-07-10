@@ -7,9 +7,15 @@
     <div class="col-md-6">
       <h2>Posts</h2>
       {% for photos_item in photos %}
+      <div class="profile">
+        <img class="profile_photo" src="{{ photos_item.profile.profile_photo.url }}"
+          alt="{{ photos_item.profile.name }}">
+        <div>
+          <p class="username" style="margin-top: 5px;">{{ photos_item.profile.username }}</p>
+        </div>
+      </div>
       <!--Display photos photo images  -->
-      <a href=""><img src="{{photos_item.image.url}}"
-          class="img-thumbnail" alt="Image"></a>
+      <a href=""><img src="{{photos_item.image.url}}" class="img-thumbnail" alt="Image"></a>
 
       {% empty %}
       <div class="row">

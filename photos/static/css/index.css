@@ -5,6 +5,14 @@ body {
 .photo {
   margin-bottom: 2rem;
 }
+.profile_photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.username {
+  color: #058F03;
+}
 nav {
   background-color: black !important;
   color: red !important;
