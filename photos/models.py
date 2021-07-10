@@ -6,7 +6,8 @@ from django.db.models.fields.related import ForeignKey
 
 # Create your models here.
 class Profile(models.Model):
-  pass
+  profile_photo = CloudinaryField('image')
+  bio = TextField()
 
 class Image(models.Model):
   image = CloudinaryField('image')
