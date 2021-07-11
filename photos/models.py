@@ -42,5 +42,32 @@ class Image(models.Model):
   def __str__(self):
     return self.image_name
 
+  def save_image(self):
+    self.save()
 
+  def delete_image(self):
+    self.delete()
 
+  @classmethod
+  def get_profile_images(cls, profile):
+    images = Image.objects.filter(profile__pk=profile)
+    return images
+
+class Comment(models.Model):
+  photo = models.ForeignKey(Image,blank=True, on_delete=models.CASCADE,related_name='comment')
+  comment_username = models.ForeignKey(User, blank=True)
+  comment= models.TextField()
+
+  def save_comment(self):
+    self.save()
+
+  def delete_comment(self):
+    self.delete()
+
+  @classmethod
+  def get_image_comments(cls, id):
+    comments = Comment.objects.filter(image__pk=id)
+    return comments
+
+  def __str__(self):
+    return str(self.comment)
