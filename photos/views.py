@@ -1,4 +1,4 @@
-from photos.forms import SearchForm
+from photos.forms import SearchForm,PostForm
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404,HttpResponseRedirect
@@ -15,7 +15,7 @@ def index(request):
   return render(request,'index.html',{'photos':photos,'profile':profile,'form':search_form,'current_user':current_user,})
 
 @login_required(login_url='accounts/login/')
-def add_image(request):
+def post(request):
     current_user = request.user
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
@@ -33,6 +33,35 @@ def add_image(request):
 def search(request):
   return redirect('home')
 
+@login_required(login_url='/login')
+def profile(request):
+    current_user = request.user
+    # profile_details = Profile.objects.get(owner_id=current_user.id)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST,request.FILES)
+        if form.is_valid():
+            profile =form.save(commit=False)
+            profile.owner = current_user
+            profile.save()
+    else:
+        form=ProfileForm()
+
+    return render(request, 'profile/profile.html', locals())
+
+
+@login_required(login_url='/accounts/login/')
+def display_profile(request, id):
+    user=User.objects.filter(id=id).first()
+    profile = user.profile
+    profile_details = Profile.get_by_id(id)
+    photos = Image.get_profile_images(id)
+
+    usersss = User.objects.get(id=id)
+    people=User.objects.all()
+    
+
+    return render(request,'profile/profile.html',locals())
+
 def follow(request):
   return redirect('home')
 
@@ -40,7 +69,4 @@ def unfollow(request):
   return redirect('home')
 
 def subscribe(request):
-  return redirect('home')
-
-def profile(request):
   return redirect('home')

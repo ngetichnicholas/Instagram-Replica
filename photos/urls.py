@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
   url(r'^$',views.index,name='home'),
   url('^search/', views.search, name='search'),
+  url(r'^post/$', views.post, name='post'),
   url(r'^follow/(\d+)', views.follow, name='follow'),
   url(r'^unfolow/(\d+)', views.unfollow, name='unfollow'),
   url(r'^subscribe/', views.subscribe, name='subscribe'),
