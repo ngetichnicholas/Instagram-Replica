@@ -37,16 +37,6 @@ def profile(request):
   
   return render(request,'profile/profile.html',{"images":images,"current_user":current_user})
 
-@login_required(login_url='/accounts/login/')
-def display_profile(request, id):
-    seekuser=User.objects.filter(id=id).first()
-    profile = seekuser.profile
-    profile_details = Profile.get_by_id(id)
-    images = Image.get_profile_images(id)
-
-    usersss = User.objects.get(id=id)
-    people=User.objects.all()
-
 def search(request):
   return redirect('home')
 

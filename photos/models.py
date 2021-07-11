@@ -42,15 +42,28 @@ class Image(models.Model):
     return self.image_name
 
   def save_image(self):
-    self.save()
-
-  def delete_image(self):
-    self.delete()
+     self.save()
 
   @classmethod
-  def get_profile_images(cls, profile):
-    images = Image.objects.filter(profile__pk=profile)
+  def display_images(cls):
+    images = cls.objects.all()
     return images
+
+  @property
+  def all_comments(self):
+    return self.comments.all()
+
+  @property
+  def all_likes(self):
+    return self.imagelikes.count()
+
+  @classmethod
+  def search_images(cls,search_term):
+    images = cls.objects.filter(name__icontains = search_term).all()
+    return images
+
+  def delete_post(self):
+    self.delete()
 
 class Like(models.Model):
   user=models.ForeignKey(User)
