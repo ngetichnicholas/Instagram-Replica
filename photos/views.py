@@ -2,7 +2,7 @@ from photos.forms import SearchForm,PostForm,ProfileForm,CommentForm
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404,HttpResponseRedirect
-from .models import Image, Profile,Comment
+from .models import Image, Profile,Comment,Like
 from django.contrib.auth.models import User
 
 
@@ -34,7 +34,7 @@ def search(request):
   return redirect('home')
 
 @login_required(login_url='/login')
-def profile(request):
+def update_profile(request):
     current_user = request.user
     # profile_details = Profile.objects.get(owner_id=current_user.id)
     if request.method == 'POST':
@@ -50,7 +50,7 @@ def profile(request):
 
 
 @login_required(login_url='/accounts/login/')
-def display_profile(request, id):
+def profile(request, id):
     user=User.objects.filter(id=id).first()
     profile = user.profile
     profile_details = Profile.get_by_id(id)
@@ -62,8 +62,19 @@ def display_profile(request, id):
 
     return render(request,'profile/profile.html',locals())
 
-def follow(request):
-  return redirect('home')
+def follow(request,user_id):
+    users=User.objects.get(id=user_id)
+
+    return redirect('accounts/profile/', locals())
+
+
+def like(request, image_id):
+    current_user = request.user
+    photos=Image.objects.get(id=image_id)
+    new_like,created= Like.objects.get_or_create(liker=current_user, photos=photos)
+    new_like.save()
+
+    return redirect('home')
 
 def comment(request,image_id):
     current_user=request.user
