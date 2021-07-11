@@ -1,8 +1,8 @@
-from photos.forms import SearchForm,PostForm,ProfileForm
+from photos.forms import SearchForm,PostForm,ProfileForm,CommentForm
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404,HttpResponseRedirect
-from .models import Image, Profile
+from .models import Image, Profile,Comment
 from django.contrib.auth.models import User
 
 
@@ -65,8 +65,25 @@ def display_profile(request, id):
 def follow(request):
   return redirect('home')
 
-def unfollow(request):
-  return redirect('home')
+def comment(request,image_id):
+    current_user=request.user
+    photo = Image.objects.get(id=image_id)
+    profile_username = User.objects.get(username=current_user)
+    comments = Comment.objects.all()
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.photo = photo
+            comment.comment_username = current_user
+            comment.save()
+
+        return redirect('home')
+
+    else:
+        form = CommentForm()
+
+    return render(request, 'comment.html', locals())
 
 def subscribe(request):
   return redirect('home')
