@@ -1,0 +1,50 @@
+{% extends "registration/base.html" %}
+{% load bootstrap3 %}
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-6">
+      <div class="col-sm-4">
+        <img src="{{user.profile.profile_photo.url}}" alt="{{user.profile_pic.url}}" width="200" height="200" class="rounded-circle account-img">
+      </div>
+      {% for photos_item in photos %}
+      <div class="profile">
+        <img class="profile_photo" src="{{ photos_item.profile.profile_photo.url }}"
+          alt="{{ photos_item.profile.name }}">
+        <div>
+          <p class="username" style="margin-top: 5px;">{{ photos_item.profile.username }}</p>
+        </div>
+      </div>
+      <!--Display photos photo images  -->
+      <a href=""><img src="{{photos_item.image.url}}" class="img-thumbnail" alt="Image"></a>
+
+      {% empty %}
+      <div class="row">
+        <h2 class="text-center">There is No photos Items</h2>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="col-md-2">
+      <h2>People</h2>
+      {% for person in people %}
+      <div class="row">
+        <div class="col-md-3">
+          <img class="profile_photo" src=""
+          alt="">
+        </div>
+        <div class="col-md-9">
+          <p class="username" style="margin-top: 5px;"></p>
+        </div>
+      </div>
+      {% empty %}
+      <div class="row">
+        <h2 class="text-center">No people yet</h2>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+
+</div>
+{% endblock %}

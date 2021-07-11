@@ -30,6 +30,23 @@ def post(request):
 
     return render(request,'post.html',locals())
 
+@login_required
+def profile(request):
+  current_user = request.user
+  images = Image.objects.filter(user_id = current_user.id).all()
+  
+  return render(request,'profile/profile.html',{"images":images,"current_user":current_user})
+
+@login_required(login_url='/accounts/login/')
+def display_profile(request, id):
+    seekuser=User.objects.filter(id=id).first()
+    profile = seekuser.profile
+    profile_details = Profile.get_by_id(id)
+    images = Image.get_profile_images(id)
+
+    usersss = User.objects.get(id=id)
+    people=User.objects.all()
+
 def search(request):
   return redirect('home')
 
@@ -47,20 +64,6 @@ def update_profile(request):
         form=ProfileForm()
 
     return render(request, 'profile/profile.html', locals())
-
-
-@login_required(login_url='/accounts/login/')
-def profile(request, id):
-    user=User.objects.filter(id=id).first()
-    profile = user.profile
-    profile_details = Profile.get_by_id(id)
-    photos = Image.get_profile_images(id)
-
-    usersss = User.objects.get(id=id)
-    people=User.objects.all()
-    
-
-    return render(request,'profile/profile.html',locals())
 
 def follow(request,user_id):
     users=User.objects.get(id=user_id)

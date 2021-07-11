@@ -8,7 +8,7 @@ from django.db.models.fields.related import ForeignKey
 # Create your models here.
 class Profile(models.Model):
   profile_photo = CloudinaryField('image')
-  username = models.OneToOneField(User,blank=True, on_delete=models.CASCADE, related_name="profile")
+  username = models.OneToOneField(User,on_delete = models.CASCADE)
   bio = TextField()
 
   def profile_save(self):
@@ -34,10 +34,9 @@ class Image(models.Model):
   image = CloudinaryField('image')
   image_name = CharField(max_length=30)
   image_caption = CharField(max_length=144)
-  profile = models.ForeignKey(User, on_delete=models.CASCADE)
-  likes = CharField(max_length=10)
-  comments = TextField()
   posted_at = models.DateTimeField(auto_now_add=True)
+  user = models.ForeignKey(User,on_delete = models.CASCADE)
+
 
   def __str__(self):
     return self.image_name
