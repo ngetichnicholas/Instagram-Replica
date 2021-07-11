@@ -1,9 +1,11 @@
-from photos.forms import SearchForm,PostForm,ProfileForm,CommentForm
+from photos.forms import SearchForm,PostForm,UpdateUser,UpdateProfile,CommentForm
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404,HttpResponseRedirect
 from .models import Image, Profile,Comment,Like
 from django.contrib.auth.models import User
+from django.contrib import messages
+
 
 
 # Create your views here.
@@ -33,27 +35,33 @@ def post(request):
 @login_required
 def profile(request):
   current_user = request.user
+  photos = Image.objects.all().order_by("-posted_at")
   images = Image.objects.filter(user_id = current_user.id).all()
   
-  return render(request,'profile/profile.html',{"images":images,"current_user":current_user})
+  return render(request,'profile/profile.html',{"images":images,'photos':photos,"current_user":current_user})
 
 def search(request):
   return redirect('home')
 
-@login_required(login_url='/login')
+@login_required
 def update_profile(request):
-    current_user = request.user
-    # profile_details = Profile.objects.get(owner_id=current_user.id)
-    if request.method == 'POST':
-        form = ProfileForm(request.POST,request.FILES)
-        if form.is_valid():
-            profile =form.save(commit=False)
-            profile.owner = current_user
-            profile.save()
-    else:
-        form=ProfileForm()
+  if request.method == 'POST':
+    u_form = UpdateUser(request.POST,instance=request.user)
+    p_form = UpdateProfile(request.POST,request.FILES,instance=request.user.profile)
+    if u_form.is_valid() and p_form.is_valid():
+      u_form.save()
+      p_form.save()
+      messages.success(request,'Your Profile account has been updated successfully')
+      return redirect('profile')
+  else:
+    u_form = UpdateUser(instance=request.user)
+    p_form = UpdateProfile(instance=request.user.profile) 
+  params = {
+    'u_form':u_form,
+    'p_form':p_form
+  }
+  return render(request,'profile/update.html',params)
 
-    return render(request, 'profile/profile.html', locals())
 
 def follow(request,user_id):
     users=User.objects.get(id=user_id)

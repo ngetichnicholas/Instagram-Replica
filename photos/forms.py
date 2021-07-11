@@ -1,5 +1,7 @@
 from django import forms
 from .models import Profile,Image,Comment
+from django.contrib.auth.models import User
+
 
 
 class SearchForm(forms.Form):
@@ -8,14 +10,24 @@ class SearchForm(forms.Form):
 class PostForm(forms.ModelForm):
   class Meta:
     model = Image
-    exclude =['likes','profile']
+    fields = ['image','image_name','image_caption']
 
-class ProfileForm(forms.ModelForm):
+class UpdateUser(forms.ModelForm):
+  email = forms.EmailField()
+  class Meta:
+    model = User
+    fields = ['username','email']
+
+class UpdateProfile(forms.ModelForm):
   class Meta:
     model = Profile
-    exclude=['username']
+    fields = ['profile_photo','bio']
 
 class CommentForm(forms.ModelForm):
+  def __init__(self,*args,**kwargs):
+    super().__init__(*args,**kwargs)
+    self.fields['comment'].widget=forms.TextInput()
+    self.fields['comment'].widget.attrs['placeholder']='Add a comment...'
   class Meta:
     model = Comment
-    exclude = ['photo', 'comment_username']
+    fields = ('comment',)

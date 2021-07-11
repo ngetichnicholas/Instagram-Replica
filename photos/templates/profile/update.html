@@ -1,0 +1,55 @@
+{% extends "registration/base.html" %}
+{% load bootstrap3 %}
+{% block content %}
+<div class="container">
+  <div class="container pt-3">
+    <div class="row">
+      <div class="col-md-3">
+        <ul class="nav" id="my" role="tablist">
+        <li>
+          <a href="#edit_profile" class="nav-link text-monospace font-weight-bold"data-toggle="tab" role="tab" aria-controls="posts" aria-selected="">
+            Edit profile
+          </a>
+        </li>
+        <li>
+          <a href="#deleteprofile" class="nav-link text-monospace font-weight-bold"data-toggle="tab" role="tab" aria-controls="posts" aria-selected="">
+            Delete Account
+          </a>
+        </li>
+        </ul>
+      </div>
+      <div class="col-md-8">
+        <div class="flex">
+        <div>
+          <img src="{{user.profile.profile_pic.url}}" class="rounded-circle border" alt="img" width="80" height="80">
+        </div>
+        <div>
+          <h2 class="text-monospace ml-3 pt-2"><small><strong>{{user.username}}</strong></small></h2>
+        </div>
+        </div>
+        <hr>
+  
+        <div class="tab-content" id="myContent">
+            <div class="tab-pane fade show active " id="edit_profile" role="tabpanel">
+                <div class="tab-content" id="myContent">
+                    <div class="tab-pane fade show active " id="edit_profile" role="tabpanel">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                          {% csrf_token %}
+                          <fieldset class="form-group">
+                            <label for="" class="border-bottom mb-4 text-center">Edit profile</label>
+                            {% bootstrap_form u_form%}
+                            {% bootstrap_form p_form%}
+                          </fieldset>
+                          <div class="form-group">
+                            <button class="btn btn-outline-info" type="submit">Update</button>
+                          </div>
+                        </form>  
+                    </div>
+                   </div>  
+            </div>
+           </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  {% endblock %}
