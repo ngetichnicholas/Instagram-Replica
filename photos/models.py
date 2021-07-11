@@ -12,20 +12,20 @@ class Profile(models.Model):
   bio = TextField()
 
   def profile_save(self):
-      self.save()
+    self.save()
 
   def delete_profile(self):
-      self.delete()
+    self.delete()
 
   @classmethod
   def get_by_id(cls, id):
-      profile = Profile.objects.get(username=id)
-      return profile
+    profile = Profile.objects.get(username=id)
+    return profile
 
   @classmethod
   def get_profile_by_username(cls, username):
-      profiles = cls.objects.filter(username__contains=username)
-      return profiles
+    profiles = cls.objects.filter(username__contains=username)
+    return profiles
 
   def __str__(self):
     return self.username
