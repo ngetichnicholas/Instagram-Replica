@@ -53,6 +53,10 @@ class Image(models.Model):
     images = Image.objects.filter(profile__pk=profile)
     return images
 
+class Like(models.Model):
+  user=models.ForeignKey(User)
+  photo =models.ForeignKey(Image)
+
 class Comment(models.Model):
   photo = models.ForeignKey(Image,blank=True, on_delete=models.CASCADE,related_name='comment')
   comment_username = models.ForeignKey(User, blank=True)
