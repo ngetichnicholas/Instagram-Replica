@@ -36,3 +36,14 @@ class Image(models.Model):
   photo_caption = models.TextField()
   posted_at = models.DateTimeField(auto_now_add=True)
   user = models.ForeignKey(User,on_delete = models.CASCADE)
+
+class Comment(models.Model):
+  pass
+
+class Like(models.Model):
+  pass
+
+class Follows(models.Model):
+  pass
+
+

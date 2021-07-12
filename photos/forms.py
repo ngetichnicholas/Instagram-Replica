@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from .models import Profile,Comment,Image
+from django.contrib.auth.models import User
 
 class postPhotoForm(forms.ModelForm):
   class Meta:
@@ -14,8 +14,7 @@ class CommentsForm(forms.ModelForm):
     self.fields['comment'].widget=forms.TextInput()
     self.fields['comment'].widget.attrs['placeholder']='Leave a comment...'
   class Meta:
-    model = Comment
-    fields = ('comment',)
+    pass
     
 class Registration(UserCreationForm):
   email = forms.EmailField()
