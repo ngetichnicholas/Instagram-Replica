@@ -37,6 +37,8 @@
               </div>
             </div>
             <div>
+              <a href=" {% url 'like' image_id=photo.id %}">
+                <i class="fa fa-heart-o fa-3x" style="color: black" aria-hidden="true"></i></a>
               <p><strong class="ml-3 photo_likes">{{photo.all_likes}} </strong>
                 <strong>Likes</strong>
               </p>

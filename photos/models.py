@@ -90,9 +90,8 @@ class Follows(models.Model):
     return "%s follower" % self.follower
 
 class Like(models.Model):
-  like = models.BooleanField()
-  photo = models.ForeignKey(Image, on_delete = models.CASCADE,related_name='photolikes')
-  user = models.ForeignKey(User,on_delete = models.CASCADE,related_name='userlikes')
+  image =models.ForeignKey(Image, on_delete = models.CASCADE,related_name='photolikes')
+  liker=models.ForeignKey(User,on_delete = models.CASCADE,related_name='userlikes')
 
   def __str__(self):
     return "%s like" % self.photo

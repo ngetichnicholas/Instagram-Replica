@@ -17,8 +17,9 @@ def index(request):
   post_form = postPhotoForm()
   photos = Image.display_photos()
   users = User.objects.all()
+  likes = Like.objects.all
   
-  return render (request,'index.html',{"photos":photos,"comment_form":comment_form,"post":post_form,"all":users})
+  return render (request,'index.html',{"photos":photos,"likes":likes,"comment_form":comment_form,"post":post_form,"all":users})
 
 @login_required
 def post(request):
@@ -66,20 +67,13 @@ def search(request):
   else:
     return render(request,'search.html')
 
-@login_required
-def likes(request,photo_id):
-  if request.method == 'GET':
-    photo = Image.objects.get(pk = photo_id)
-    user = request.user
-    check_user = Like.objects.filter(user = user,photo = photo).first()
-    if check_user == None:
-      photo = Image.objects.get(pk = photo_id)
-      like = Like(like = True,photo = photo,user = user)
-      like.save()
-      return JsonResponse({'success':True,"img":photo_id,"status":True})
-    else:
-      check_user.delete()
-      return JsonResponse({'success':True,"img":photo_id,"status":False})
+def like(request, photo_id):
+    current_user = request.user
+    image=Image.objects.get(id=photo_id)
+    new_like,created= Like.objects.get_or_create(liker=current_user, image=image)
+    new_like.save()
+
+    return redirect('home')
  
 
 
@@ -134,10 +128,10 @@ def delete(request,photo_id):
   return redirect('profile')
 
 
-def like(request, photo_id):
+def like(request, image_id):
     current_user = request.user
-    photos=Image.objects.get(id=photo_id)
-    new_like,created= Like.objects.get_or_create(liker=current_user, photos=photos)
+    image=Image.objects.get(id=image_id)
+    new_like,created= Like.objects.get_or_create(liker=current_user, image=image)
     new_like.save()
 
     return redirect('home')
