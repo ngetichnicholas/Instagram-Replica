@@ -8,38 +8,26 @@
     <div class="col-md-4 search">
 
 
-      {% if users %}
-      <h6 class="text-center text-monospace">
-        Profiles found
-      </h6>
-      {% for user in users %}
-      <div class="flex">
-        <div>
-          <a href="{% url 'users_profile' user.user.id  %}">
-            <img src="{{user.user.profile.profile_pic.url}}" class="rounded-circle border" alt="img" width="50"
+      <div class="row">
+        {% if users%}
+        <h2 class="text-center">Found {{ users|length }} person(s)</h2>
+      {% else %}
+        <h2 class="text-center"> Found 0 results</h2>
+      {% endif %}
+      </div>
+      {% for person in users %}
+      <div class="row">
+        <div class="col-md-3">
+          <a href="{% url 'users_profile' person.user.id  %}">
+            <img src="{{person.user.profile.profile_photo.url}}" class="rounded-circle border" alt="img" width="50"
               height="50">
           </a>
         </div>
-        <div>
-          <p class="ml-2"><span class="font-weight-bold">{{user.user.username}}</span></p>
+        <div class="col-md-3">
+          <p class="ml-2"><span class="font-weight-bold">{{person.user.username}}</span></p>
         </div>
       </div>
       {% endfor %}
-      {% endif %}
-
-      {% if images %}
-      <h6 class="text-center text-monospace">
-        posts found
-      </h6>
-      {% for image in images %}
-      <p>
-        <a href="{% url 'allcomments' image_id=image.id %}" class="text-muted text-center">{{image.name}} </a>
-      </p>
-      {% endfor %}
-
-      {% endif %}
-
-
     </div>
     <div class="col-md-4"></div>
   </div>

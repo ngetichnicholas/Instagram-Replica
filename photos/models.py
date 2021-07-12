@@ -30,7 +30,7 @@ class Image(models.Model):
 
   @classmethod
   def search_photos(cls,search_term):
-    photos = cls.objects.filter(name__icontains = search_term).all()
+    photos = cls.objects.filter(photo_name__icontains = search_term).all()
     return photos
 
   def delete_post(self):
