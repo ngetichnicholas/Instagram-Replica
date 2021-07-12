@@ -68,17 +68,24 @@
       <div class="">
         <h2>People</h2>
       </div>
-      {% for user in users %}
-      <div class="row">
-        <div class="col-md-2">
-          <p><a href="{% url 'users_profile' user.id %}"><img class="profile_photo"
-                src="{{ user.profile.profile_photo.url }}" alt="profile"></p>
+      <div class="">
+        {% if all %}
+        {% for person in all %}
+        <div class="row">
+          <div class="col-md-4">
+            <p><a href="{% url 'users_profile' person.id  %}"><img src="{{person.profile.profile_photo.url}}"
+                  class="rounded-circle border" alt="profile" style="height: 8vh; width:8vh; border-radius:50%"></a></p>
+          </div>
+          <div class="col-md-6">
+            <p></p><a href="{% url 'users_profile' person.id   %}">
+              <p class="text-primary">{{person.username}}</p>
+              </p>
+            </a>
+          </div>
         </div>
-        <div class="col-md-2">
-          <p class="username" style="margin-top: 5px;">{{ user.username }}</p>
-        </div>
+        {% endfor %}
+        {% endif %}
       </div>
-      {% endfor %}
 
     </div>
   </div>
