@@ -40,7 +40,7 @@ class Image(models.Model):
     return "%s photo" % self.name
 
 class Profile(models.Model):
-  profile_photo = CloudinaryField('photo')
+  profile_photo = CloudinaryField('image')
   bio = models.TextField()
   user = models.OneToOneField(User,on_delete = models.CASCADE)
 

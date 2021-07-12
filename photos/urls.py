@@ -13,14 +13,14 @@ urlpatterns = [
   path('accounts/profile/',views.profile,name='profile'),
   path('update/',app_views.update_profile,name='update_profile'),
   path('post/',app_views.post,name='post'),
-  re_path(r'^comment/(?P<image_id>\d+)$',app_views.commenting,name='commenting'),
-  re_path(r'^likes/(?P<image_id>\d+)$',app_views.likes,name='likes'),
-  re_path(r'^allcomments/(?P<image_id>\d+)$',app_views.allcomments,name='allcomments'),
+  re_path(r'^comment/(?P<photo_id>\d+)$',app_views.commenting,name='commenting'),
+  re_path(r'^likes/(?P<photo_id>\d+)$',app_views.likes,name='likes'),
+  re_path(r'^allcomments/(?P<photo_id>\d+)$',app_views.allcomments,name='allcomments'),
   re_path(r'^search/$',app_views.search,name='search'),
   re_path(r'^feeds_profile/(?P<pk>\d+)$',app_views.users_profile,name='users_profile'),
   re_path(r'^follow/(?P<user_id>\d+)$',app_views.follow,name='follow'),
   re_path(r'^unfollow/(?P<user_id>\d+)$',app_views.unfollow,name='unfollow'),
-  re_path(r'^delete/(?P<image_id>\d+)$',app_views.delete,name='delete'),
+  re_path(r'^delete/(?P<photo_id>\d+)$',app_views.delete,name='delete'),
 
 
 ]

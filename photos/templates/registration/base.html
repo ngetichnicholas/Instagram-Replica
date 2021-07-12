@@ -50,6 +50,12 @@
               </a>
               <ul class="dropdown-menu" role="menu">
                 <li>
+                  <a href="{% url 'profile'%}">Profile</a>
+                </li>
+                <li>
+                  <a href="{% url 'post'%}">Post</a>
+                </li>
+                <li>
                   <a href="/accounts/password/change">Change Password</a>
                 </li>
                 <li>
@@ -59,10 +65,10 @@
             </li>
             {% else %}
             <li>
-              <a class='btn btn-danger' style="color: white;" href="/accounts/register">Sigup</a>
+              <a class='btn btn-danger' style="color: white;" href="{% url 'register' %}">Sigup</a>
             </li>
             <li>
-              <a class='btn btn-danger' style="color: white; margin-left:5px" href="/accounts/login">Login</a>
+              <a class='btn btn-danger' style="color: white; margin-left:5px" href="{% url 'login' %}">Login</a>
             </li>
 
             {% endif %}

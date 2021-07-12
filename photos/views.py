@@ -15,10 +15,10 @@ from .email import send_welcome_email
 def index(request):
   comment_form = CommentsForm()
   post_form = postPhotoForm()
-  images = Image.display_images()
+  photos = Image.display_photos()
   users = User.objects.all()
   
-  return render (request,'index.html',{"images":images,"comment_form":comment_form,"post":post_form,"all":users})
+  return render (request,'index.html',{"photos":photos,"comment_form":comment_form,"post":post_form,"all":users})
 
 @login_required
 def post(request):
@@ -52,50 +52,52 @@ def register(request):
 def profile(request):
   current_user = request.user
   photos = Image.objects.all()
-  images = Image.objects.filter(user_id = current_user.id).all()
+  user_photos = Image.objects.filter(user_id = current_user.id).all()
   
-  return render(request,'profile/profile.html',{"images":images,'photos':photos,"current_user":current_user})
+  return render(request,'profile/profile.html',{"photos":photos,'user_photos':user_photos,"current_user":current_user})
 
 @login_required
 def search(request):
   if 'search_user' in request.GET and request.GET["search_user"]:
     name = request.GET.get('search_user')
     the_users = Profile.search_profiles(name)
-    images = Image.search_images(name)
+    photos = Image.search_photos(name)
     print(the_users) 
-    return render(request,'search.html',{"users":the_users,"images":images})
+    return render(request,'search.html',{"users":the_users,"photos":photos})
   else:
     return render(request,'search.html')
 
 @login_required
-def likes(request,image_id):
+def likes(request,photo_id):
   if request.method == 'GET':
-    image = Image.objects.get(pk = image_id)
+    photo = Image.objects.get(pk = photo_id)
     user = request.user
-    check_user = Like.objects.filter(user = user,image = image).first()
+    check_user = Like.objects.filter(user = user,photo = photo).first()
     if check_user == None:
-      image = Image.objects.get(pk = image_id)
-      like = Like(like = True,image = image,user = user)
+      photo = Image.objects.get(pk = photo_id)
+      like = Like(like = True,photo = photo,user = user)
       like.save()
-      return JsonResponse({'success':True,"img":image_id,"status":True})
+      return JsonResponse({'success':True,"img":photo_id,"status":True})
     else:
       check_user.delete()
-      return JsonResponse({'success':True,"img":image_id,"status":False})
+      return JsonResponse({'success':True,"img":photo_id,"status":False})
  
 
 
 @login_required
-def allcomments(request,image_id):
-  image = Image.objects.filter(pk = image_id).first()
-  return render(request,'comments.html',{"image":image})
+def allcomments(request,photo_id):
+  photo = Image.objects.filter(pk = photo_id).first()
+  return render(request,'comments.html',{"photo":photo})
 
 @login_required
 def users_profile(request,pk):
+  comment_form = CommentsForm()
   user = User.objects.get(pk = pk)
-  images = Image.objects.filter(user = user)
+  photos = Image.objects.filter(user = user)
   c_user = request.user
   
-  return render(request,'profile/users_profile.html',{"user":user,"images":images,"c_user":c_user})
+  return render(request,'profile/users_profile.html',{"user":user,'comment_form':comment_form,
+"photos":photos,"c_user":c_user})
 
 @login_required
 def update_profile(request):
@@ -126,31 +128,31 @@ def unfollow(request,user_id):
   return redirect('users_profile')
 
 @login_required
-def delete(request,image_id):
-  image = Image.objects.get(pk=image_id)
-  if image:
-    image.delete_post()
+def delete(request,photo_id):
+  photo = Image.objects.get(pk=photo_id)
+  if photo:
+    photo.delete_post()
   return redirect('profile')
 
 
-def like(request, image_id):
+def like(request, photo_id):
     current_user = request.user
-    photos=Image.objects.get(id=image_id)
+    photos=Image.objects.get(id=photo_id)
     new_like,created= Like.objects.get_or_create(liker=current_user, photos=photos)
     new_like.save()
 
     return redirect('home')
 
 @login_required
-def commenting(request,image_id):
+def commenting(request,photo_id):
   c_form = CommentsForm()
-  image = Image.objects.filter(pk = image_id).first()
+  photo = Image.objects.filter(pk = photo_id).first()
   if request.method == 'POST':
     c_form = CommentsForm(request.POST)
     if c_form.is_valid():
       comment = c_form.save(commit = False)
       comment.user = request.user
-      comment.image = image
+      comment.photo = photo
       comment.save() 
   return redirect('home')
 

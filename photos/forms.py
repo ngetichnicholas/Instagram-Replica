@@ -14,7 +14,8 @@ class CommentsForm(forms.ModelForm):
     self.fields['comment'].widget=forms.TextInput()
     self.fields['comment'].widget.attrs['placeholder']='Leave a comment...'
   class Meta:
-    pass
+    model = Comment
+    fields = ('comment',)
     
 class Registration(UserCreationForm):
   email = forms.EmailField()

@@ -17,7 +17,7 @@
           </a>
         </div>
         <div class="row2 mt-3">
-          <p class="text-monospace">{{images|length}} posts</p>
+          <p class="text-monospace">{{user_photos|length}} posts</p>
           <p class="text-monospace ml-3">{{user.profile.all_followers}} followers</p>
           <p class="text-monospace ml-3">{{user.profile.all_following}} following</p>
         </div>
@@ -36,15 +36,16 @@
     <div class="col-md-3"></div>
     <div class="col-md-3">
       <h2>Timeline</h2>
-      {% for photos_item in photos %}
+      {% for photo in photos %}
       <div class="profile">
-        <img class="profile_photo" src="{{ photos_item.profile.profile_photo.url }}" alt="{{ photos_item.profile.name }}">
+        <a href="{% url 'users_profile' photo.user.id %}"><img class="profile_photo" src="{{ photo.user.profile.profile_photo.url }}" alt="{{ photo.profile.name }}">
         <div>
-          <p class="username" style="margin-top: 5px;">{{ photos_item.profile.username }}</p>
+          <p class="username" style="margin-top: 5px;">{{ photo.user.username }}</p>
         </div>
+        </a>
       </div>
-      <!--Display photos photo images  -->
-      <a href=""><img src="{{photos_item.image.url}}" class="img-thumbnail" alt="Image"></a>
+      <!--Display photos photo photos  -->
+      <a href=""><img src="{{photo.photo.url}}" class="img-thumbnail" alt="Image"></a>
   
       {% empty %}
       <div class="row">
