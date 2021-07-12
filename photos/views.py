@@ -9,16 +9,14 @@ from django.http import JsonResponse
 from django.contrib.auth.models import User
 from .email import send_welcome_email
 
-
-
-@login_required(login_url='accounts/login/')
+@login_required
 def index(request):
   comment_form = CommentsForm()
   post_form = postPhotoForm()
   photos = Image.display_photos()
-  users = User.objects.all()
+  all_users = User.objects.all()
   
-  return render (request,'index.html',{"photos":photos,"comment_form":comment_form,"post":post_form,"all":users})
+  return render (request,'index.html',{"photos":photos,"comment_form":comment_form,"post":post_form,"all_users":all_users})
 
 @login_required
 def post(request):
@@ -50,11 +48,13 @@ def register(request):
 
 @login_required
 def profile(request):
+  comment_form = CommentsForm()
   current_user = request.user
   photos = Image.objects.all()
+  all_users = User.objects.all()
   user_photos = Image.objects.filter(user_id = current_user.id).all()
   
-  return render(request,'profile/profile.html',{"photos":photos,'user_photos':user_photos,"current_user":current_user})
+  return render(request,'profile/profile.html',{"photos":photos,'all_users':all_users,'comment_form':comment_form,'user_photos':user_photos,"current_user":current_user})
 
 @login_required
 def search(request):
@@ -65,17 +65,7 @@ def search(request):
     return render(request,'search.html',{"users":users,"photos":photos})
   else:
     return render(request,'search.html')
-
-def like(request, photo_id):
-    current_user = request.user
-    image=Image.objects.get(id=photo_id)
-    new_like,created= Like.objects.get_or_create(liker=current_user, image=image)
-    new_like.save()
-
-    return redirect('home')
  
-
-
 @login_required
 def allcomments(request,photo_id):
   photo = Image.objects.filter(pk = photo_id).first()
@@ -110,6 +100,21 @@ def update_profile(request):
   }
   return render(request,'profile/update.html',params)
 
+@login_required
+def follow(request,user_id):
+  followee = request.user
+  followed = Follows.objects.get(pk=user_id)
+  follow_data,created = Follows.objects.get_or_create(follower = followee,followee = followed)
+  follow_data.save()
+  return redirect('others_profile')
+
+def like(request, image_id):
+    current_user = request.user
+    image=Image.objects.get(id=image_id)
+    new_like,created= Like.objects.get_or_create(liker=current_user, image=image)
+    new_like.save()
+
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 @login_required
 def unfollow(request,user_id):
@@ -127,14 +132,6 @@ def delete(request,photo_id):
   return redirect('profile')
 
 
-def like(request, image_id):
-    current_user = request.user
-    image=Image.objects.get(id=image_id)
-    new_like,created= Like.objects.get_or_create(liker=current_user, image=image)
-    new_like.save()
-
-    return HttpResponseRedirect(request.META['HTTP_REFERER'])
-    
 @login_required
 def commenting(request,photo_id):
   c_form = CommentsForm()
@@ -148,10 +145,3 @@ def commenting(request,photo_id):
       comment.save() 
   return redirect('home')
 
-@login_required
-def follow(request,user_id):
-  followee = request.user
-  followed = Follows.objects.get(pk=user_id)
-  follow_data = Follows(follower = followee.profile,followee = followed.profile)
-  follow_data.save()
-  return redirect('users_profile')

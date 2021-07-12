@@ -1,84 +1,80 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
 {% block content %}
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-3"></div>
+    <div class="col-md-4">
       {% if photos %}
       {% for photo in photos %}
-      <div class="row">
-        <div class="card pt-3 mt-4">
-          <div class="profile">
-            <div class="row">
-              <div class="col-md-2">
-                <p><a href="{% url 'users_profile' photo.user.id %}"><img class="profile_photo"
-                      src="{{ photo.user.profile.profile_photo.url }}" alt="{{ photo.profile.name }}"></p>
-              </div>
-              <div class="col-md-2">
-                <p class="username" style="margin-top: 5px;">{{ photo.user.username }}</p>
-              </div>
-            </div>
-
-            </a>
+      <div class="profile">
+        <div class="row">
+          <div class="col-md-2">
+            <p><a href="{% url 'users_profile' photo.user.id %}"><img class="profile_photo"
+                  src="{{ photo.user.profile.profile_photo.url }}" alt="{{ photo.profile.name }}"></p>
           </div>
-          <div class="card-header">
-            <img src="{{photo.photo.url}}" alt="" class="img-tumbnail">
-          </div>
-          <div class="card-body">
-            <div class="flex">
-
-              <div class="ml-3">
-                <i class="fas fa-heart like_u">
-                  <input type="hidden" class="post_id" value="{{photo.pk}}">
-                </i>
-              </div>
-              <div class="ml-3">
-                <a href="{% url 'allcomments' photo_id=photo.id %}"><i class="far fa-comment"></i></a>
-              </div>
-            </div>
-            <div>
-              <a href=" {% url 'like' image_id=photo.id %}">
-                <i class="fa fa-heart-o fa-3x text-success"  aria-hidden="true"></i></a>
-              <p><strong class="ml-3 photo_likes">{{photo.all_likes}} </strong>
-                <strong>Likes</strong>
-              </p>
-            </div>
-            <div>
-              <p class=""><strong>{{photo.name}}</strong> {{photo.caption}}</p>
-            </div>
-            {% if photo.all_comments.count > 2 %}
-            <div class="ml-3 ">
-              <a href="{% url 'allcomments' photo_id=photo.id %}" class="text-muted">View all
-                {{photo.all_comments|length}} comments</a>
-            </div>
-            {% endif %}
-            {% for comment in photo.all_comments|slice:"2" %}
-            <p class="ml-3"><span class="font-weight-bold text-success">{{comment.user.username}}</span>: {{comment.comment}}</p>
-            {% endfor %}
-            <form action="{% url 'commenting' photo_id=photo.id %}" method="post">
-              {% csrf_token %}
-              {% bootstrap_form comment_form %}
-              <input type="submit" class="btn btn-success btn-lg" style="margin-bottom: 10px;" value="Comment">
-            </form>
+          <div class="col-md-2">
+            <p class="username" style="margin-top: 5px;">{{ photo.user.username }}</p>
           </div>
         </div>
+        </a>
+      </div>
+      <div class="card-header">
+        <img src="{{photo.photo.url}}" alt="" class="img-tumbnail">
+      </div>
+      <div class="card-body">
+        <div class="flex">
+          <div class="ml-3">
+            <i class="fas fa-heart like_u">
+              <input type="hidden" class="post_id" value="{{photo.pk}}">
+            </i>
+          </div>
+          <div class="ml-3">
+            <a href="{% url 'allcomments' photo_id=photo.id %}"><i class="far fa-comment"></i></a>
+          </div>
+        </div>
+        <div>
+          <a href=" {% url 'like' image_id=photo.id %}">
+            <i class="fa fa-heart-o fa-3x text-success" aria-hidden="true"></i></a>
+          <p><strong class="ml-3 photo_likes">{{photo.all_likes}} </strong>
+            <strong>Likes</strong>
+          </p>
+        </div>
+        <div>
+          <p class=""><strong>{{photo.name}}</strong> {{photo.caption}}</p>
+        </div>
+        {% if photo.all_comments.count > 2 %}
+        <div class="ml-3 ">
+          <a href="{% url 'allcomments' photo_id=photo.id %}" class="text-muted">View all
+            {{photo.all_comments|length}} comments</a>
+        </div>
+        {% endif %}
+        {% for comment in photo.all_comments|slice:"2" %}
+        <p class="ml-3"><span class="font-weight-bold text-success">{{comment.user.username}}</span>:
+          {{comment.comment}}</p>
+        {% endfor %}
+        <form action="{% url 'commenting' photo_id=photo.id %}" method="post">
+          {% csrf_token %}
+          {% bootstrap_form comment_form %}
+          <input type="submit" class="btn btn-success btn-lg" style="margin-bottom: 10px;" value="Comment">
+        </form>
       </div>
       {% endfor %}
       {% endif %}
     </div>
-    <div class="col-md-3" id="fix">
+    <div class="col-md-2">
       <div class="">
         <h2>People</h2>
       </div>
       <div class="">
-        {% if all %}
-        {% for person in all %}
+        {% if all_users %}
+        {% for person in all_users %}
         <div class="row">
           <div class="col-md-4">
             <p><a href="{% url 'users_profile' person.id  %}"><img src="{{person.profile.profile_photo.url}}"
                   class="rounded-circle border" alt="profile" style="height: 8vh; width:8vh; border-radius:50%"></a></p>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <p></p><a href="{% url 'users_profile' person.id   %}">
               <p class="text-primary">{{person.username}}</p>
               </p>
@@ -88,8 +84,8 @@
         {% endfor %}
         {% endif %}
       </div>
-
     </div>
+    <div class="col-md-3"></div>
   </div>
 </div>
 {% endblock %}
