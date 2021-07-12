@@ -138,7 +138,7 @@ def delete(request,photo_id):
   photo = Image.objects.get(pk=photo_id)
   if photo:
     photo.delete_post()
-  return redirect('profile')
+  return redirect('home')
 
 
 @login_required

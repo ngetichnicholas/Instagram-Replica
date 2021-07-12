@@ -19,6 +19,8 @@
       </p>
       <P><strong>{{photo.all_comments.count}}</strong> Comment(s)</P>
       <P>Posted on: <strong>{{photo.posted_at}}</strong></P>
+      <a href="{% url 'delete' photo.id %}" class="btn btn-danger">Delete</a>
+
     </div>
     <div class="col-md-3"></div>
   </div>
