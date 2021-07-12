@@ -38,7 +38,7 @@
             </div>
             <div>
               <a href=" {% url 'like' image_id=photo.id %}">
-                <i class="fa fa-heart-o fa-3x" style="color: black" aria-hidden="true"></i></a>
+                <i class="fa fa-heart-o fa-3x text-success"  aria-hidden="true"></i></a>
               <p><strong class="ml-3 photo_likes">{{photo.all_likes}} </strong>
                 <strong>Likes</strong>
               </p>
@@ -53,12 +53,12 @@
             </div>
             {% endif %}
             {% for comment in photo.all_comments|slice:"2" %}
-            <p class="ml-3"><span class="font-weight-bold">{{comment.user.username}}</span>: {{comment.comment}}</p>
+            <p class="ml-3"><span class="font-weight-bold text-success">{{comment.user.username}}</span>: {{comment.comment}}</p>
             {% endfor %}
             <form action="{% url 'commenting' photo_id=photo.id %}" method="post">
               {% csrf_token %}
               {% bootstrap_form comment_form %}
-              <input type="submit" class="btn btn-success btn-lg" value="Comment">
+              <input type="submit" class="btn btn-success btn-lg" style="margin-bottom: 10px;" value="Comment">
             </form>
           </div>
         </div>

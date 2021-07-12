@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import Http404
+from django.http import Http404,HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from . forms import Registration,UpdateUser,UpdateProfile,CommentsForm,postPhotoForm
@@ -17,9 +17,8 @@ def index(request):
   post_form = postPhotoForm()
   photos = Image.display_photos()
   users = User.objects.all()
-  likes = Like.objects.all
   
-  return render (request,'index.html',{"photos":photos,"likes":likes,"comment_form":comment_form,"post":post_form,"all":users})
+  return render (request,'index.html',{"photos":photos,"comment_form":comment_form,"post":post_form,"all":users})
 
 @login_required
 def post(request):
@@ -134,8 +133,8 @@ def like(request, image_id):
     new_like,created= Like.objects.get_or_create(liker=current_user, image=image)
     new_like.save()
 
-    return redirect('home')
-
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+    
 @login_required
 def commenting(request,photo_id):
   c_form = CommentsForm()

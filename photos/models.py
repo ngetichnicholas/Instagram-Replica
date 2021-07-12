@@ -17,7 +17,7 @@ class Image(models.Model):
 
   @classmethod
   def display_photos(cls):
-    photos = cls.objects.all()
+    photos = cls.objects.all().order_by('-posted_at')
     return photos
 
   @property
