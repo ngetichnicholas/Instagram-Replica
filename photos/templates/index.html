@@ -20,7 +20,7 @@
         </a>
       </div>
       <div class="card-header">
-        <img src="{{photo.photo.url}}" alt="" class="img-tumbnail">
+        <a href="{% url 'photo.detail' photo.id %}" class="open-project"><img src="{{photo.photo.url}}" alt="" class="img-tumbnail"></a>
       </div>
       <div class="card-body">
         <div class="flex">

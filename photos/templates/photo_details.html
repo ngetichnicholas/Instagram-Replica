@@ -1,0 +1,26 @@
+{%extends 'base.html'%}
+{% block content %} 
+{{ block.super}}
+
+<div class="container-fluid">
+
+  <!-- Looping through photos   -->
+  <div class="row photo">
+    <div class="col-md-3"></div>
+    <!-- displaying photos photos -->
+    <div class="col-md-6">
+      <h2 class="text-success">{{ photo.title }}</h2>
+      <p>{{ photo.photo_name}}</p>
+      <!--Display photos photo images  -->
+      <img src="{{photo.photo.url}}" class="img-responsive" alt="Image" onclick="window.open(this.src)">
+      <p>{{photo.photo_caption}}</p>
+      <p><strong class="ml-3 photo_likes">{{photo.all_likes}} </strong>
+        <strong>Likes</strong>
+      </p>
+      <P><strong>{{photo.all_comments.count}}</strong> Comment(s)</P>
+      <P>Posted on: <strong>{{photo.posted_at}}</strong></P>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>
+{% endblock %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from django.http import Http404,HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -8,6 +8,8 @@ from .models import Image,Profile,Like,Follows
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from .email import send_welcome_email
+from django.core.exceptions import ObjectDoesNotExist
+
 
 @login_required
 def index(request):
@@ -31,6 +33,13 @@ def post(request):
   else:
     post_form = postPhotoForm()
   return render(request,'post.html',{"post_form":post_form})
+
+def detail(request,photo_id):
+  try:
+    photo = get_object_or_404(Image, pk = photo_id)
+  except ObjectDoesNotExist:
+    raise Http404()
+  return render(request, 'photo_details.html', {'photo':photo})
 
 def register(request):
   if request.method == 'POST':

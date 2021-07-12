@@ -13,6 +13,7 @@ urlpatterns = [
   path('accounts/profile/',views.profile,name='profile'),
   path('update/',app_views.update_profile,name='update_profile'),
   path('post/',app_views.post,name='post'),
+  path('photo/<int:photo_id>',views.detail,  name='photo.detail'),
   re_path(r'^comment/(?P<photo_id>\d+)$',app_views.commenting,name='commenting'),
   re_path(r'^like/(?P<image_id>\d+)', app_views.like, name='like'),
   re_path(r'^allcomments/(?P<photo_id>\d+)$',app_views.allcomments,name='allcomments'),
