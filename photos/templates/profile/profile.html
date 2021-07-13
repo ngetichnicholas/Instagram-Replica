@@ -30,10 +30,10 @@
           <p class="">{{user_photos|length}} posts</p>
             </div>
             <div class="col-md-4">
-              <p class="">{{user.profile.all_followers}} followers</p>
+              <p class="">{{user.profile.saved_followers}} followers</p>
             </div>
             <div class="col-md-4">
-              <p class="">{{user.profile.all_following}} following</p>
+              <p class="">{{user.profile.saved_following}} following</p>
             </div>
           </div>
         </div>
@@ -75,18 +75,18 @@
         <div>
           <a href=" {% url 'like' image_id=photo.id %}">
             <i class="fa fa-heart-o fa-3x text-success" aria-hidden="true"></i></a>
-          <p><strong class="ml-3 photo_likes">{{photo.all_likes}} </strong>
+          <p><strong class="ml-3 photo_likes">{{photo.saved_likes}} </strong>
             <strong>Likes</strong>
           </p>
         </div>
         <div>
           <p class=""><strong>{{photo.name}}</strong> {{photo.caption}}</p>
         </div>
-        {% for comment in photo.all_comments %}
+        {% for comment in photo.saved_comments %}
         <p class="ml-3"><span class="font-weight-bold text-success">{{comment.user.username}}</span>:
           {{comment.comment}}</p>
         {% endfor %}
-        <form action="{% url 'commenting' photo_id=photo.id %}" method="post">
+        <form action="{% url 'commentFunction' photo_id=photo.id %}" method="post">
           {% csrf_token %}
           {% bootstrap_form comment_form %}
           <input type="submit" class="btn btn-success btn-lg" style="margin-bottom: 10px;" value="Comment">

@@ -21,11 +21,11 @@ class Image(models.Model):
     return photos
 
   @property
-  def all_comments(self):
+  def saved_comments(self):
     return self.comments.all()
 
   @property
-  def all_likes(self):
+  def saved_likes(self):
     return self.photolikes.count()
 
   @classmethod
@@ -55,11 +55,11 @@ class Profile(models.Model):
     instance.profile.save()
 
   @property
-  def all_followers(self):
+  def saved_followers(self):
     return self.followers.count()   
 
   @property
-  def all_following(self):
+  def saved_following(self):
     return self.following.count() 
 
 

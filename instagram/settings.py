@@ -17,9 +17,9 @@ import cloudinary.api
 
 cloudinary.config(
     cloud_name ='dbos9xidr',
-    api_key ="928959943118794",
-    api_secret ="6_BMOJktqtDlv05ntKqjkRRnodY",
-    secure = True
+    api_key=config('CLOUDINARY_KEY'), 
+    api_secret=config('CLOUDINARY_SECRET'),
+    secure = True,
 )
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)

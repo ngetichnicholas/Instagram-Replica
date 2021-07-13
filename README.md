@@ -36,9 +36,6 @@ A user can search other users and it will return users found or display "Found 0
 ![alt text](https://res.cloudinary.com/dbos9xidr/image/upload/v1626157535/screencapture-127-0-0-1-8000-search-2021-07-13-09_25_11_d1wgdy.png)
 *****
 ## Behaviour Driven Development
-1. Provides a like button
-   - INPUT: Heart  button icon clicked
-   - OUTPUT: Image liked
 1. Provides comment form
    - INPUT: comment typed in the form input
    - INPUT: comment button clicked
@@ -52,6 +49,9 @@ A user can search other users and it will return users found or display "Found 0
 1. Show user profile 
    - INPUT: Account action option profile clicked
    - OUTPUT: Profile page with user information and other users posts displayed
+1. Shows a like button
+   - INPUT: Heart  button icon clicked
+   - OUTPUT: Image liked
 1. Provides a search form
    - INPUT: Search term entered in the search field
    - OUTPUT: Number of matched user results displayed in the page
@@ -64,7 +64,9 @@ A user can search other users and it will return users found or display "Found 0
 ## Dependencies
 * django-bootstrap
 * Pillow
+* cloudinary
 * psycopg2
+* django-registration
 * python-decouple
 * Python Venv
 * whitenoise

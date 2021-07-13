@@ -144,7 +144,7 @@ def delete(request,photo_id):
 
 
 @login_required
-def commenting(request,photo_id):
+def commentFunction(request,photo_id):
   c_form = CommentsForm()
   photo = Image.objects.filter(pk = photo_id).first()
   if request.method == 'POST':
