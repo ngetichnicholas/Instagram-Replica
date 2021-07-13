@@ -13,7 +13,7 @@ body {
   color: #058F03;
 }
 nav {
-  color: red !important;
+  color: #4888BE !important;
   height: 8vh !important;
   font-size: 25;
   padding-top: 1vh;
@@ -24,9 +24,6 @@ a {
 }
 h2,h1 {
   color: #449D44;
-}
-.open-project:hover {
-  opacity: 0.5;
 }
 .img-thumbnail {
   cursor: pointer;

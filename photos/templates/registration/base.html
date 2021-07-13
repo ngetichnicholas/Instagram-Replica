@@ -28,7 +28,7 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
           <a class="navbar-brand" href="">
-            <p style="color: red;font-size:50px;">Instagram</p>
+            <p style="color: #4888BE;font-size:50px;"><i class="fa fa-instagram"  aria-hidden="true"></i> Instagram</p>
           </a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
             data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -45,7 +45,7 @@
               <div class="col-sm-6 col-md-6">
                 {% if user.is_authenticated %}
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button"
+              <a href="#" class="dropdown-toggle btn btn-default" style="color: #4888BE;" data-toggle="dropdown" role="button"
                 aria-expanded="false">Account
                 <span class="caret"></span>
               </a>
@@ -66,10 +66,10 @@
             </li>
             {% else %}
             <li>
-              <a class='btn btn-danger' style="color: white;" href="{% url 'register' %}">Sigup</a>
+              <a class='btn btn-default' style="color: #4888BE;" href="{% url 'register' %}">Sigup</a>
             </li>
             <li>
-              <a class='btn btn-danger' style="color: white; margin-left:5px" href="{% url 'login' %}">Login</a>
+              <a class='btn btn-default' style="color: #4888BE; margin-left:5px" href="{% url 'login' %}">Login</a>
             </li>
 
             {% endif %}

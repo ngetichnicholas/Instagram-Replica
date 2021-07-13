@@ -1,38 +1,35 @@
-{% extends 'registration/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4 search">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 search text-center">
 
 
-      <div class="row">
-        {% if users%}
-        <h2 class="text-center">Found {{ users|length }} person(s)</h2>
+      {% if users%}
+      <h2 class="text-center">Found {{ users|length }} person(s)</h2>
       {% else %}
-        <h2 class="text-center"> Found 0 results</h2>
+      <h2 class="text-center"> Found 0 results</h2>
       {% endif %}
-      </div>
       {% for person in users %}
-      <div class="row">
-        <div class="col-md-3">
-          <a href="{% url 'users_profile' person.user.id  %}">
-            <img src="{{person.user.profile.profile_photo.url}}" class="rounded-circle border" alt="img" width="50"
-              height="50">
-          </a>
-        </div>
-        <div class="col-md-3">
-          <p class="ml-2"><span class="font-weight-bold">{{person.user.username}}</span></p>
-        </div>
-      </div>
+      <p><a class="text-primary" href="{% url 'users_profile' person.user.id  %}"><span
+            class="font-weight-bold">{{person.user.username}}</span></a></p>
+            {% if person.user.profile.profile_photo.url %}
+      <p><a href="{% url 'users_profile' person.user.id  %}">
+          <img src="{{person.user.profile.profile_photo.url}}" style="height: 20vh; width:20vh;border-radius:50%"
+            class="rounded-circle border" alt="img" width="50" height="50">
+        </a></p>
+        {% else %}
+        <i style="font-size:100px;color:#4888BE" class="fa fa-user" aria-hidden="true"></i>
+        {% endif %}
       {% endfor %}
     </div>
-    <div class="col-md-4"></div>
+    <div class="col-md-3"></div>
   </div>
 </div>
-
+</div>
 
 
 {% endblock %}

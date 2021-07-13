@@ -10,17 +10,21 @@
       <div class="profile">
         <div class="row">
           <div class="col-md-2">
+            {% if photo.user.profile.profile_photo.url %}
             <p><a href="{% url 'users_profile' photo.user.id %}"><img class="profile_photo"
-                  src="{{ photo.user.profile.profile_photo.url }}" alt="{{ photo.profile.name }}"></p>
+                  src="{{ photo.user.profile.profile_photo.url }}" alt="{{ photo.profile.name }}"></a></p>
+                  {% else %}
+                  <i style="font-size:100px;color:#4888BE" class="fa fa-user" aria-hidden="true"></i>
+                  {% endif %}
           </div>
           <div class="col-md-2">
-            <p class="username" style="margin-top: 5px;">{{ photo.user.username }}</p>
+            <p><a class="username" style="margin-top: 5px;" href="{% url 'users_profile' photo.user.id %}">{{ photo.user.username }}</a></p>
           </div>
         </div>
-        </a>
+        
       </div>
       <div class="card-header">
-        <a href="{% url 'photo.detail' photo.id %}" class="open-project"><img src="{{photo.photo.url}}" alt="" class="img-tumbnail"></a>
+        <a href="{% url 'photo.detail' photo.id %}" class="open-project"><img src="{{photo.photo.url}}" alt="" class="img-thumbnail"></a>
       </div>
       <div class="card-body">
         <div class="flex">
@@ -71,8 +75,12 @@
         {% for person in all_users %}
         <div class="row">
           <div class="col-md-4">
+            {% if person.profile.profile_photo.url %}
             <p><a href="{% url 'users_profile' person.id  %}"><img src="{{person.profile.profile_photo.url}}"
                   class="rounded-circle border" alt="profile" style="height: 8vh; width:8vh; border-radius:50%"></a></p>
+                  {% else %}
+                  <i style="font-size:100px;color:#4888BE" class="fa fa-user" aria-hidden="true"></i>
+                  {% endif %}
           </div>
           <div class="col-md-4">
             <p></p><a href="{% url 'users_profile' person.id   %}">

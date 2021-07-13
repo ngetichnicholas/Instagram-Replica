@@ -6,23 +6,24 @@
 
   <!-- Looping through photos   -->
   <div class="row photo">
-    <div class="col-md-3"></div>
+    <div class="col-md-4"></div>
     <!-- displaying photos photos -->
-    <div class="col-md-6">
+    <div class="col-md-4">
       <h2 class="text-success">{{ photo.title }}</h2>
-      <p>{{ photo.photo_name}}</p>
+      <h2>{{ photo.photo_name}}</h2>
       <!--Display photos photo images  -->
-      <img src="{{photo.photo.url}}" class="img-responsive" alt="Image" onclick="window.open(this.src)">
-      <p>{{photo.photo_caption}}</p>
-      <p><strong class="ml-3 photo_likes">{{photo.all_likes}} </strong>
-        <strong>Likes</strong>
+      <img src="{{photo.photo.url}}" class="img-thumbnail" alt="Image" onclick="window.open(this.src)">
+      <p style="font-style: oblique;">{{photo.photo_caption}}</p>
+      <p>Likes: <strong>{{photo.all_likes}} </strong>
       </p>
-      <P><strong>{{photo.all_comments.count}}</strong> Comment(s)</P>
-      <P>Posted on: <strong>{{photo.posted_at}}</strong></P>
+      <P>Comments: <strong>{{photo.all_comments.count}}</strong></P>
+      <P>Posted on: <strong>{{photo.posted_at}}</strong> by <span class="text-success">{{photo.user.username}}</span></P>
+      {% if photo.user.username == current_user.username %}
       <a href="{% url 'delete' photo.id %}" class="btn btn-danger">Delete</a>
+      {% endif %}
 
     </div>
-    <div class="col-md-3"></div>
+    <div class="col-md-4"></div>
   </div>
 </div>
 {% endblock %}
