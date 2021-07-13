@@ -66,13 +66,7 @@
         <div>
           <p class=""><strong>{{photo.name}}</strong> {{photo.caption}}</p>
         </div>
-        {% if photo.all_comments.count > 2 %}
-        <div class="ml-3 ">
-          <a href="{% url 'allcomments' photo_id=photo.id %}" class="text-muted">View all
-            {{photo.all_comments|length}} comments</a>
-        </div>
-        {% endif %}
-        {% for comment in photo.all_comments|slice:"2" %}
+        {% for comment in photo.all_comments %}
         <p class="ml-3"><span class="font-weight-bold text-success">{{comment.user.username}}</span>:
           {{comment.comment}}</p>
         {% endfor %}
