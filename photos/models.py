@@ -37,7 +37,7 @@ class Image(models.Model):
     self.delete()
 
   def __str__(self):
-    return "%s photo" % self.name
+    return "%s photo" % self.photo_name
 
 class Profile(models.Model):
   profile_photo = CloudinaryField('image')
