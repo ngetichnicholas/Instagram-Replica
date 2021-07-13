@@ -36,6 +36,13 @@ A user can search other users and it will return users found or display "Found 0
 ![alt text](https://res.cloudinary.com/dbos9xidr/image/upload/v1626157535/screencapture-127-0-0-1-8000-search-2021-07-13-09_25_11_d1wgdy.png)
 *****
 ## Behaviour Driven Development
+1. Provides a like button
+   - INPUT: Heart  button icon clicked
+   - OUTPUT: Image liked
+1. Provides comment form
+   - INPUT: comment typed in the form input
+   - INPUT: comment button clicked
+   - OUTPUT: New comment added to the image
 1. Show user profile 
    - INPUT: Account option profile clicked
    - OUTPUT: Profile page with user information and other users posts displayed
@@ -64,7 +71,7 @@ A user can search other users and it will return users found or display "Found 0
 * CSS
 ******
 ### Live Link
-Or you can access the web application directly via this [LIVE LINK]().
+Or you can access the web application directly via this [LIVE LINK](https://nick-instagram.herokuapp.com/).
 *****
 ### License
 This project is under:  
