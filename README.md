@@ -17,6 +17,20 @@ To access this project on your local files, you can clone it using these steps
 1. Use this command to clone $ git clone https://github.com/ngetichnicholas/Instagram-Replica.git
 1. This will clone the repositoty into your local folder
 *****
+### User Profile and Timeline posts
+After a user successfully sign up and login, they will be redirected to profile page showing user information and posts by other users
+![alt text](https://res.cloudinary.com/dbos9xidr/image/upload/v1626157017/screencapture-nick-instagram-herokuapp-accounts-profile-2021-07-13-09_09_20_rhwfbf.png)
+*****
+### View Photo details
+A user can click on any image and a page will be displayed containing the photo information like image name, caption, number of comments and likes and also date posted.  
+*****
+![alt text](https://res.cloudinary.com/dbos9xidr/image/upload/v1626157362/screencapture-nick-instagram-herokuapp-photo-10-2021-07-13-09_10_58_ktsjzu.png)
+*****
+### Search Function
+A user can search other users and it will return users found or display "Found 0 results if no match found by the search function.
+*****
+![alt text](https://res.cloudinary.com/dbos9xidr/image/upload/v1626157535/screencapture-127-0-0-1-8000-search-2021-07-13-09_25_11_d1wgdy.png)
+*****
 ## Dependencies
 * django-bootstrap
 * Pillow
