@@ -26,6 +26,7 @@ After a user successfully sign up and login, they will be redirected to profile 
 *****
 ### View Photo details
 A user can click on any image and a page will be displayed containing the photo information like image name, caption, number of comments and likes and also date posted.  
+A user can only see a delete button if they are the owner of the post so they cannot delete a post belonging to another user
 *****
 ![alt text](https://res.cloudinary.com/dbos9xidr/image/upload/v1626157362/screencapture-nick-instagram-herokuapp-photo-10-2021-07-13-09_10_58_ktsjzu.png)
 *****
