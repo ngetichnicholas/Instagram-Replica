@@ -60,7 +60,7 @@ def register(request):
 def profile(request):
   comment_form = CommentsForm()
   current_user = request.user
-  photos = Image.objects.all()
+  photos = Image.objects.all().order_by('-posted_at')
   all_users = User.objects.all()
   user_photos = Image.objects.filter(user_id = current_user.id).all()
   
