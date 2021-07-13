@@ -43,8 +43,14 @@ A user can search other users and it will return users found or display "Found 0
    - INPUT: comment typed in the form input
    - INPUT: comment button clicked
    - OUTPUT: New comment added to the image
+1. Provides form to post photo 
+   - INPUT: Account action option 'post' clicked
+   - OUTPUT: Form page displayed
+   - INPUT: Form field inputs filled
+   - INPUT: Post button clicked
+   - OUTPUT: New post added
 1. Show user profile 
-   - INPUT: Account option profile clicked
+   - INPUT: Account action option profile clicked
    - OUTPUT: Profile page with user information and other users posts displayed
 1. Provides a search form
    - INPUT: Search term entered in the search field
