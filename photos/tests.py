@@ -1,7 +1,18 @@
 from django.test import TestCase
 
 # Create your tests here.
-class TestComments(TestCase):
+class ProfileTestClass(TestCase):
+
+  def setUp(self):
+    self.user = User.objects.create_user("Nick","pass")
+    self.profile_test = Profile(profile_photo='https://res.cloudinary.com/dbos9xidr/image/upload/v1626138202/vx39cozmzrnwvofuvuvf.jpg',bio='Student',user=self.user)
+    self.profile_test.save()
+
+  def test_instance_true(self):
+    self.profile_test.save()
+    self.assertTrue(isinstance(self.profile_test,Profile))
+        
+class TestCommentsClass(TestCase):
 
   def setUp(self):
     self.test_user = User(username = 'Nicholas')
@@ -9,7 +20,7 @@ class TestComments(TestCase):
     self.photo = Image(photo = 'new_photo.png',photo_name = 'software photo',photo_caption = 'software engineer',user = self.test_user)
     self.comments = Comment(comment = 'Nice one',photo = self.photo,user = self.test_user)
 
-class TestImages(TestCase):
+class TestImagesClass(TestCase):
 
   def setUp(self):
 
