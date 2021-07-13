@@ -27,16 +27,6 @@
         <a href="{% url 'photo.detail' photo.id %}" class="open-project"><img src="{{photo.photo.url}}" alt="" class="img-thumbnail"></a>
       </div>
       <div class="card-body">
-        <div class="flex">
-          <div class="ml-3">
-            <i class="fas fa-heart like_u">
-              <input type="hidden" class="post_id" value="{{photo.pk}}">
-            </i>
-          </div>
-          <div class="ml-3">
-            <a href="{% url 'allcomments' photo_id=photo.id %}"><i class="far fa-comment"></i></a>
-          </div>
-        </div>
         <div>
           <a href=" {% url 'like' image_id=photo.id %}">
             <i class="fa fa-heart-o fa-3x text-success" aria-hidden="true"></i></a>
